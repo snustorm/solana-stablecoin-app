@@ -9,9 +9,6 @@ use crate::constants::{
     SEED_CONFIG_ACCOUNT,
 };
 
-
-
-
 #[derive(Accounts)]
 pub struct RedeemCollateralAndBurnTokens<'info> {
 
@@ -57,7 +54,7 @@ pub fn process_redeem_collateral_and_burn_tokens(
 ) -> Result<()> {
 
     let collaral_account = &mut ctx.accounts.collateral_account;
-    collaral_account.lamport_balance -= ctx.accounts.sol_account.lamports() - amount_collateral;
+    collaral_account.lamport_balance = ctx.accounts.sol_account.lamports() - amount_collateral;
     collaral_account.amount_minted -= amount_to_burn;
 
     check_health_factor(
@@ -78,7 +75,7 @@ pub fn process_redeem_collateral_and_burn_tokens(
         &ctx.accounts.system_program,
         &ctx.accounts.sol_account,
         &ctx.accounts.depositor,
-        ctx.accounts.collateral_account.bump,
+        ctx.accounts.collateral_account.bump_sol_account,
         &ctx.accounts.depositor.key(),
         amount_collateral,
     )?;

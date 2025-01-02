@@ -6,4 +6,6 @@ pub enum CustomError {
     InvalidPrice,
     #[msg("Below min health factor")]
     BelowMinHealthFactor,
+    #[msg("Can not liquidate a healthy account")]
+    AboveMinHealthFactor,
 }

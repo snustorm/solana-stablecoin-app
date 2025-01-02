@@ -1,7 +1,8 @@
-use anchor_lang::{prelude::*, system_program::{transfer, Transfer}};
+use anchor_lang::prelude::*;
+use anchor_lang::system_program::{transfer, Transfer};
 use anchor_spl::token_interface::{Mint, Token2022, TokenAccount};
 use anchor_spl::token_2022::{burn, Burn};
-use crate::constants::{SEED_SOL_ACCOUNT};
+use crate::constants::SEED_SOL_ACCOUNT;
 
 pub fn withdraw_sol<'info>(
     system_program: &Program<'info, System>,
